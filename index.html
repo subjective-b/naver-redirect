@@ -184,14 +184,25 @@
 
 <script>
 (function(){
-  // ── 기본값: Linktree 버튼에 ?to= 파라미터 없이 이 페이지를 걸었을 때 이동할 주소 ──
-  var DEFAULT_URL = "https://smartstore.naver.com/subjective_b/products/13674974128";
+  // ── 상품별 짧은 이름 → 실제 링크 매핑. 새 상품 생길 때 여기에 한 줄만 추가하면 됨. ──
+  //    사용법: ?p=gold-delta 처럼 짧은 이름으로 링크 공유
+  var PRODUCTS = {
+    "brunelle":   "https://mkt.shopping.naver.com/link/6a83f295e19f9b5a30235076", // 브루넬 (Brunelle)
+    "gold-delta": "https://mkt.shopping.naver.com/link/6a83f29591e12b06b85963b7", // 골드 델타
+    "evelyn":     "https://mkt.shopping.naver.com/link/6a8ef19a83e1344816cd9e3b", // 에블린 (Evelyn)
+    "rose-drop":  "https://mkt.shopping.naver.com/link/6a8ef19aaeac3553bb291952"  // 로즈 드롭
+    // "다음상품이름": "https://mkt.shopping.naver.com/link/...",
+  };
+  var DEFAULT_URL = PRODUCTS["gold-delta"]; // ?p= 없이 그냥 열었을 때 갈 기본 상품
   // ────────────────────────────────────────────────────────────────────────
 
   var qs = new URLSearchParams(location.search);
-  var raw = qs.get("to");
+  var productKey = qs.get("p");
+  var raw = qs.get("to"); // 매핑에 없는 링크를 급하게 한 번 쓸 때용 (인코딩 필요)
   var TARGET_URL = DEFAULT_URL;
-  if (raw) {
+  if (productKey && PRODUCTS[productKey]) {
+    TARGET_URL = PRODUCTS[productKey];
+  } else if (raw) {
     try {
       var u = new URL(raw);
       if (u.protocol === "https:" || u.protocol === "http:") TARGET_URL = u.href;
