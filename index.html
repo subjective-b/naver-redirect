@@ -1,42 +1,18 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Karla:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Karla:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
   :root{
-    --bg:#F5F7F3;
-    --surface:#FFFFFF;
-    --text:#171A14;
-    --muted:#666C5E;
-    --border:#E2E6DC;
-    --accent:#1F7A5C;
-    --accent-ink:#0F4A36;
-    --accent-soft:#E4F0E7;
-    --focus:#1F7A5C;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#12140F;
-      --surface:#1A1D15;
-      --text:#ECEFE7;
-      --muted:#9BA391;
-      --border:#2B2F23;
-      --accent:#57C793;
-      --accent-ink:#B7EBCF;
-      --accent-soft:#1E2B21;
-      --focus:#57C793;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#12140F;
-    --surface:#1A1D15;
-    --text:#ECEFE7;
-    --muted:#9BA391;
-    --border:#2B2F23;
-    --accent:#57C793;
-    --accent-ink:#B7EBCF;
-    --accent-soft:#1E2B21;
-    --focus:#57C793;
+    --bg:#080808;
+    --surface:#141414;
+    --text:#F5F5F2;
+    --muted:#8C8C87;
+    --border:#252525;
+    --accent:#F5F5F2;
+    --accent-ink:#F5F5F2;
+    --focus:#F5F5F2;
   }
 
   *{box-sizing:border-box;}
+  html,body{height:100%;}
   body{
     margin:0;
     min-height:100vh;
@@ -51,60 +27,49 @@
 
   .card{
     width:100%;
-    max-width:420px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:36px 30px 30px;
+    max-width:400px;
     text-align:center;
   }
 
-  .kicker{
-    font-family:Karla,sans-serif;
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--accent);
-  }
-
   h1{
-    font-family:Manrope,sans-serif;
-    font-weight:800;
-    font-size:22px;
-    line-height:1.3;
-    letter-spacing:-.01em;
-    margin:14px 0 8px;
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    font-size:23px;
+    line-height:1.4;
+    letter-spacing:.01em;
+    margin:16px 0 8px;
     text-wrap:balance;
   }
 
   p{
-    font-size:14.5px;
-    line-height:1.6;
+    font-size:13.5px;
+    line-height:1.7;
     color:var(--muted);
     margin:0;
   }
 
-  .rail{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    margin:26px 0 22px;
+  /* ── 회전하는 브랜드 마크 (로딩 인디케이터) ── */
+  .mark{
+    position:relative;
+    width:140px;
+    height:140px;
+    margin:6px auto 30px;
   }
-  .dot{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--accent);
-    animation:pulse 1.1s ease-in-out infinite;
+  .mark svg{
+    width:100%;
+    height:100%;
+    animation:spin 16s linear infinite;
   }
-  .dot:nth-child(2){animation-delay:.15s;}
-  .dot:nth-child(3){animation-delay:.3s;}
-  @keyframes pulse{
-    0%,80%,100%{opacity:.25;transform:scale(.85);}
-    40%{opacity:1;transform:scale(1);}
+  .mark text{
+    font-family:"Cormorant Garamond",serif;
+    font-size:12.5px;
+    font-weight:500;
+    letter-spacing:2px;
+    fill:var(--text);
   }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
   @media (prefers-reduced-motion:reduce){
-    .dot{animation:none;opacity:.7;}
+    .mark svg{ animation:none; }
   }
 
   .cta{
@@ -114,22 +79,23 @@
     width:100%;
     justify-content:center;
     background:var(--accent);
-    color:#fff;
+    color:#0A0A0A;
     font-family:Karla,sans-serif;
     font-weight:600;
-    font-size:14.5px;
+    font-size:13.5px;
+    letter-spacing:.01em;
     text-decoration:none;
     padding:13px 18px;
-    border-radius:12px;
-    margin-top:18px;
+    border-radius:2px;
+    margin-top:6px;
   }
   .cta:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
 
   .weblink{
     display:block;
-    margin-top:12px;
+    margin-top:14px;
     font-family:Karla,sans-serif;
-    font-size:12.5px;
+    font-size:12px;
     font-weight:500;
     color:var(--muted);
     text-decoration:underline;
@@ -137,40 +103,47 @@
   }
 
   .target{
-    margin-top:14px;
+    margin-top:16px;
     font-family:"IBM Plex Mono",monospace;
-    font-size:11.5px;
+    font-size:11px;
     color:var(--muted);
     word-break:break-all;
     padding:10px 12px;
-    background:var(--bg);
+    background:var(--surface);
     border:1px solid var(--border);
-    border-radius:10px;
+    border-radius:2px;
   }
 
   .guide{
     display:none;
-    margin-top:20px;
+    margin-top:22px;
     text-align:left;
-    background:var(--accent-soft);
-    border-radius:12px;
+    background:var(--surface);
+    border-left:2px solid var(--border);
+    border-radius:2px;
     padding:14px 16px;
-    font-size:13.5px;
-    line-height:1.65;
-    color:var(--accent-ink);
+    font-size:13px;
+    line-height:1.7;
+    color:var(--text);
   }
-  .guide b{font-weight:700;}
+  .guide b{color:var(--text);font-weight:600;}
   .guide.show{display:block;}
 </style>
 
 <div class="card">
-  <div class="kicker">Deep Link Relay</div>
-  <h1 id="headline">네이버로 이동하고 있어요</h1>
-  <p id="sub">잠시만 기다려주시면 자동으로 연결됩니다.</p>
-
-  <div class="rail" aria-hidden="true">
-    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <div class="mark" aria-hidden="true">
+    <svg viewBox="0 0 140 140">
+      <defs>
+        <path id="ringPath" d="M70,70 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0" />
+      </defs>
+      <text>
+        <textPath href="#ringPath" startOffset="0%">Subjective B. · Subjective B. ·</textPath>
+      </text>
+    </svg>
   </div>
+
+  <h1 id="headline">네이버 앱으로 연결하고 있어요</h1>
+  <p id="sub">잠시만 기다려주시면 자동으로 이동합니다.</p>
 
   <a id="cta" class="cta" href="#">네이버 앱으로 바로 열기</a>
   <a id="webFallback" class="weblink" href="#">앱 없이 웹으로 보기</a>
@@ -238,8 +211,8 @@
 
   function showFallback() {
     document.getElementById("iosGuide").classList.add("show");
-    document.getElementById("headline").textContent = "네이버 앱 연결이 잘 안 되네요";
-    document.getElementById("sub").textContent = "위 버튼을 다시 눌러보시거나, 웹으로 계속 진행해주세요.";
+    document.getElementById("headline").textContent = "네이버 앱으로 연결 중입니다";
+    document.getElementById("sub").textContent = "위 버튼을 눌러 다시 시도해주세요.";
   }
 
   if (!isAndroid && !isIOS) {
